@@ -1,0 +1,60 @@
+Notation.txt
+
+Sudoku Notation:
+[1] Puzzle is a grid of 81 squares; columns 1-9 and rows A-I.  A collection of 9 squares (column, row, or box) is called a unit; the squares that share a unit are peers. The puzzle is solved if the squares in each unit are filed with a permutation of the digits 1-9.
+
+A typical board is outlined below:
+
+    A1 A2 A3 | A4 A5 A6 | A7 A8 A9
+    B1 B2 B3 | B4 B5 B6 | B7 B8 B9
+    C1 C2 C3 | C4 C5 C6 | C7 C8 C9
+    ---------+----------+---------
+    D1 D2 D3 | D4 D5 D6 | D7 D8 D9
+    E1 E2 E3 | E4 E5 E6 | E7 E8 E9
+    F1 F2 F3 | F4 F5 F6 | F7 F8 F9
+    ---------+----------+---------
+    G1 G2 G3 | G4 G5 G6 | G7 G8 G9
+    H1 H2 H3 | H4 H5 H6 | H7 H8 H9
+    I1 I2 I3 | I4 I5 I6 | I7 I8 I9
+
+Every square has exactly 3 units (column, row, box) and 20 peers (9 + 6 + 6)
+...............
+
+Define the Sukoku playing grid: [1] 
+Two representations:
+
+(1) a textual format used to specify the initial state of a puzzle; we will reserve the name grid for this. We'll allow a string of characters with 1-9 indicating a digit, and a 0 or period specifying an empty square. All other characters are ignored (including spaces, newlines, dashes, and bars). So each of the following three grid strings represent the same puzzle
+    "4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......"
+
+    """
+    400000805
+    030000000
+    000700000
+    020000060
+    000080400
+    000010000
+    000603070
+    500200000
+    104000000"""
+
+    """
+    4 . . |. . . |8 . 5 
+    . 3 . |. . . |. . . 
+    . . . |7 . . |. . . 
+    ------+------+------
+    . 2 . |. . . |. 6 . 
+    . . . |. 8 . |4 . . 
+    . . . |. 1 . |. . . 
+    ------+------+------
+    . . . |6 . 3 |. 7 . 
+    5 . . |2 . . |. . . 
+    1 . 4 |. . . |. . . 
+    """
+
+(2) an internal representation of any state of a puzzle, partially solved or complete; this we will call a values collection because it will give all the remaining possible values for each square.  One might think that a 9 x 9 array would be the obvious data structure. But squares have names like 'A1', not (0,0). Therefore, values will be a dict with squares as keys. The value of each key will be the possible digits for that square: a single digit if it was given as part of the puzzle definition or if we have figured out what it must be, and a collection of several digits if we are still uncertain. This collection of digits could be represented by a Python set or list, but I chose instead to use a string of digits (we'll see why later). So a grid where A1 is 7 and C7 is empty would be represented as {'A1': '7', 'C7': '123456789', ...}.
+
+References: 
+1. http://norvig.com/sudoku.html
+
+Comment by the Author:
+The motivation for writing this program was to learn a variety of tasks related to computer programming including the use of Github, developing user-interfaces, and deploying them.

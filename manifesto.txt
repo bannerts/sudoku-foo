@@ -1,0 +1,4 @@
+(1) Create an efficient sudoku solver using Python
+(2) Create a simple user interface for the Sudoku solver
+(3) Implement image recognition capable of recognizing a sudoku board for the program.
+(4) Convert the program into an easy to install application (windows, mac, linux)
